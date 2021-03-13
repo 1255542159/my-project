@@ -1,0 +1,23 @@
+export default {
+    showWarrning(msg){
+        this.$message({
+          message:msg,
+          type:'warning',
+          center:true
+        })
+      },
+        showSuccess(msg){
+        this.$message({
+          message:msg,
+          type:'success',
+          center:true
+        })
+      },
+      showError(msg){
+        this.$message({
+          message:msg,
+          type:'error',
+          center:true
+        })
+      },
+}
