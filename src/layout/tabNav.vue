@@ -36,6 +36,5 @@ export default {
   padding: 10px;
   font-style: normal;
   font-size: 22px;
-  
 }
 </style>

@@ -1,18 +1,24 @@
 import request from '../utils/request'
 export default {
-  getClubList(page,size){
+  // 获取列表不分页
+clubList(){
+  return request({
+    url:'/api/club/list/club',
+    method:'get'
+  })
+},
+
+  getClubList(page,size,status){
     return request({
-      url: '/api/club/clubList?page='+page+'&size='+size,
-      method: 'get'
+      url: '/api/club/clubList/'+page+'/'+size,
+      method: 'get',
+      params:{
+        status:status,
+        keyWords:''
+      }
     })
   },
 
-  doSearch(keyWords){
-    return request({
-      url: '/api/club/clubList?keyWords='+keyWords+'&page=1&size=5',
-      method: 'get'
-    })
-  },
   addClub(club){
     return request({
       url: '/api/club/addClub',
@@ -62,24 +68,4 @@ export default {
     })
   },
 
-  addActivity(activity){
-    return request({
-      url: '/api/club/addActivity',
-      method: 'post',
-      data:activity
-    })
-  },
-  getActivityList(page,size){
-    return request({
-      url: '/api/club/getActivityList?page='+page+'&size='+size,
-      method: 'get'
-    })
-  },
-
-  deleteActivity(activityId){
-    return request({
-      url:'/api/club/deleteActivity/'+activityId,
-      method: 'delete'
-    })
-  }
 }

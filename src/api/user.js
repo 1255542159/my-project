@@ -1,5 +1,6 @@
-import { post } from 'jquery'
+import { data, post } from 'jquery'
 import request from '../utils/request'
+import Qs from 'qs'//引入qs
 export default {
 
   logout(){
@@ -32,10 +33,14 @@ export default {
     })
   },
 
-  getPersonnelList(page,size){
+  getPersonnelList(page,size,status){
     return request({
-      url: '/api/user/personnelList?page='+page+'&size='+size,
-      method: 'get'
+      url: '/api/user/personnelList/'+page+'/'+size,
+      method: 'get',
+      params:{
+        status:status,
+        keyWords:''
+      }
     })
   },
 
@@ -46,10 +51,14 @@ export default {
       data: activity
     })
   },
-  getActivityList(page,size){
+  getActivityList(page,size,status){
     return request({
-      url: '/api/user/list/activity?page='+page+'&size='+size,
-      method: 'get'
+      url: '/api/user/list/activity/'+page+'/'+size,
+      method: 'get',
+      params:{
+        status:status,
+        keyWords:''
+      }
     })
   },
   listImages(page,size,original){
@@ -57,5 +66,11 @@ export default {
       url:'/api/user/image/list?page='+page+'&size='+size+'&original='+original,
       method:'get'
     })
-  }
+  },
+  deleteActivity(id){
+    return request({
+      url:'/api/user/delete/activity/'+id,
+      method:'delete'
+    })
+  },
 }

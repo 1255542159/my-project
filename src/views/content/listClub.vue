@@ -157,7 +157,7 @@
               class="avatar-uploader"
               name="file"
               drag
-              action="/api/user/uploadImage"
+              action="/api/user/image/uploadImage?original=club"
               :show-file-list="false"
               :on-success="uploadSuccess"
               multiple>
@@ -189,6 +189,7 @@ import * as dateUtils from '../../utils/date'
 export default {
   data () {
     return {
+      status:0,
       searchValue:'',
       value:'',
       loading:false,
@@ -359,7 +360,7 @@ export default {
     },
     getClubList(){
       this.loading = true;
-      club.getClubList(this.pageNavigation.currentPage,this.pageNavigation.pageSize)
+      club.getClubList(this.pageNavigation.currentPage,this.pageNavigation.pageSize,this.status)
         .then(response => {
           if (response.data.code === 200) {
             this.loading = false;
@@ -396,7 +397,7 @@ export default {
 .list-box{
   box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  padding: 10px;
+
   margin-top: 5px;
 }
 .el-table .warning-row {

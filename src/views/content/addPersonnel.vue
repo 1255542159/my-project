@@ -104,6 +104,7 @@ export default {
                 { id: 2, sex: "女" },
             ],
             item: {},
+            status:0
         };
     },
     methods: {
@@ -136,9 +137,9 @@ export default {
         },
         //获取全部的社团不分页
         getClubList() {
-            club.getClubList(0, 0).then((response) => {
+            club.clubList().then((response) => {
                 if (response.data.code === 200) {
-                    this.clubList = response.data.data.list;
+                    this.clubList = response.data.data;
                 }
             });
         },

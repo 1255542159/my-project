@@ -221,6 +221,7 @@ export default {
         },
       },
       item: {},
+      status:0
     };
   },
   methods: {
@@ -363,7 +364,8 @@ export default {
       user
         .getPersonnelList(
           this.pageNavigation.currentPage,
-          this.pageNavigation.pageSize
+          this.pageNavigation.pageSize,
+          this.status
         )
         .then((response) => {
           if (response.data.code === 200) {
@@ -378,7 +380,7 @@ export default {
 
     //获取全部的社团不分页
     getClubList() {
-      club.getClubList(0, 0).then((response) => {
+      club.getClubList(0, 0,this.status).then((response) => {
         if (response.data.code === 200) {
           
           this.clubList = response.data.data.list;

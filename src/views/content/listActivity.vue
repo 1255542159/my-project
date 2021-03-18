@@ -1,54 +1,145 @@
 <template>
 <div class="box">
-    <div class="search-box">
-        <!-- <el-form style="
-          margin-top: 10px;
-          margin-left: 10px;
-          font-size: large;
-          font-weight: bold;
-        ">
-            <el-form-item label="按活动名:">
-                <el-input type="text" style="width: 200px" v-model="searchValue" @keypress.enter.native="searchPersonnel"></el-input>
-                <el-button class="login-button" type="primary" @click="searchPersonnel">搜索</el-button>
-            </el-form-item>
-        </el-form> -->
-    </div>
-
     <div class="list-box">
-        <el-table v-loading="loading" :data="activity" :row-class-name="tableRowClassName" style="width: 100%" class="el-table">
-            <el-table-column prop="id" label="id" width="50"> </el-table-column>
-            <el-table-column prop="activityName" label="活动名" width="150">
-            </el-table-column>
-            <el-table-column prop="activityCreator" label="发起人" width="120">
-            </el-table-column>
-            <el-table-column prop="activityDesc" label="活动描述" width="200">
-            </el-table-column>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="全部" name="all">
+                <!-- all -->
+                <div class="success-content clearfix" v-for="(item, index) in activity" :key="index">
+                    <div class="el-card is-hover-shadow">
+                        <div class="el-card__body">
+                            <div>
+                                <!-- 标题 -->
+                                <div class="item-title">
+                                    <a v-text="item.title"></a>
+                                </div>
+                                <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
+                                <!-- 点赞，浏览 -->
+                                <div class="item-info">
+                                    <span class="el-tag el-tag--small el-tag--light" v-text="'查看数:'+item.viewCount"></span>
+                                    <span class="el-tag el-tag--success el-tag--small el-tag--light" v-text="'参与数:'+item.joinCount"></span>
+                                    <span class="el-tag el-tag--warning el-tag--small el-tag--light" v-if="item.status===1">已通过</span>
+                                    <span class="el-tag el-tag--danger el-tag--small el-tag--light" v-if="item.status===2">审核中</span>
+                                    <span class="el-tag el-tag--warning el-tag--small el-tag--light" v-if="item.status===3">未通过</span>
+                                    <span class="el-tag el-tag--info el-tag--small el-tag--light" v-text="item.updateTime"></span>
+                                    <!-- 编辑删除等 -->
+                                    <div class="right-control">
+                                        <span type="primary" size="mini" @click="edit(item)"><i class="el-icon-edit"></i>编辑
+                                        </span>
+                                        <span type="danger" size="mini" @click="deleteItem(item)"><i class="el-icon-delete"></i>删除
+                                        </span>
+                                    </div>
+                                </div>
 
-            <el-table-column label="创立时间" width="100">
-                <template slot-scope="scope">
-                    <span v-text="formatDate(scope.row.createdTime)"> </span>
-                </template>
-            </el-table-column>
-            <el-table-column label="操作">
-                <template slot-scope="scope">
-                    <el-button @click="edit(scope.row)" type="primary" size="mini">编辑</el-button>
-                    <el-button @click="deleteItem(scope.row)" type="danger" size="mini">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <div class="page-navigation-box margin-bottom clearfix">
-            <el-pagination class="user-list-page-navigation-bar" background @current-change="currentPageChange" :current-page="pageNavigation.currentPage" :page-size="pageNavigation.pageSize" layout="prev, pager, next" :total="pageNavigation.totalCount">
-            </el-pagination>
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="已通过" name="approved">
+                <div class="success-content clearfix" v-for="(item, index) in activity" :key="index">
+                    <div class="el-card is-hover-shadow">
+                        <div class="el-card__body">
+                            <div>
+                                <!-- 标题 -->
+                                <div class="item-title">
+                                    <a v-text="item.title"></a>
+                                </div>
+                                <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
+                                <!-- 点赞，浏览 -->
+                                <div class="item-info">
+                                    <span class="el-tag el-tag--small el-tag--light" v-text="'查看数:'+item.viewCount"></span>
+                                    <span class="el-tag el-tag--success el-tag--small el-tag--light" v-text="'参与数:'+item.joinCount"></span>
+                                    <span class="el-tag el-tag--warning el-tag--small el-tag--light" v-if="item.status===1">已通过</span>
+                                    <span class="el-tag el-tag--info el-tag--small el-tag--light" v-text="item.updateTime"></span>
+                                    <!-- 编辑删除等 -->
+                                    <div class="right-control">
+                                        <span type="primary" size="mini" @click="edit(item)"><i class="el-icon-edit"></i>编辑
+                                        </span>
+                                        <span type="danger" size="mini" @click="deleteItem(item)"><i class="el-icon-delete"></i>删除
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="审核中" name="approving">
+                <div class="success-content clearfix" v-for="(item, index) in activity" :key="index">
+                    <div class="el-card is-hover-shadow">
+                        <div class="el-card__body">
+                            <div>
+                                <!-- 标题 -->
+                                <div class="item-title">
+                                    <a v-text="item.title"></a>
+                                </div>
+                                <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
+                                <!-- 点赞，浏览 -->
+                                <div class="item-info">
+                                    <span class="el-tag el-tag--small el-tag--light" v-text="'查看数:'+item.viewCount"></span>
+                                    <span class="el-tag el-tag--success el-tag--small el-tag--light" v-text="'参与数:'+item.joinCount"></span>
+                                    <span class="el-tag el-tag--danger el-tag--small el-tag--light" v-if="item.status===2">审核中</span>
+                                    <span class="el-tag el-tag--info el-tag--small el-tag--light" v-text="item.updateTime"></span>
+                                    <!-- 编辑删除等 -->
+                                    <div class="right-control">
+                                        <span type="primary" size="mini" @click="edit(item)"><i class="el-icon-edit"></i>编辑
+                                        </span>
+                                        <span type="danger" size="mini" @click="deleteItem(item)"><i class="el-icon-delete"></i>删除
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="未通过" name="failed">
+                <div class="success-content clearfix" v-for="(item, index) in activity" :key="index">
+                    <div class="el-card is-hover-shadow">
+                        <div class="el-card__body">
+                            <div>
+                                <!-- 标题 -->
+                                <div class="item-title">
+                                    <a v-text="item.title"></a>
+                                </div>
+                                <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
+                                <!-- 点赞，浏览 -->
+                                <div class="item-info">
+                                    <span class="el-tag el-tag--small el-tag--light" v-text="'查看数:'+item.viewCount"></span>
+                                    <span class="el-tag el-tag--success el-tag--small el-tag--light" v-text="'参与数:'+item.joinCount"></span>
+                                    <span class="el-tag el-tag--warning el-tag--small el-tag--light" v-if="item.status===3">未通过</span>
+                                    <span class="el-tag el-tag--info el-tag--small el-tag--light" v-text="item.updateTime"></span>
+                                    <!-- 编辑删除等 -->
+                                    <div class="right-control">
+                                        <span type="primary" size="mini" @click="edit(item)"><i class="el-icon-edit"></i>编辑
+                                        </span>
+                                        <span type="danger" size="mini" @click="deleteItem(item)"><i class="el-icon-delete"></i>删除
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
     </div>
-    <div class="club-dialog">
+    <div class="page-navigation-box margin-bottom clearfix">
+        <el-pagination class="user-list-page-navigation-bar" background @current-change="currentPageChange" :current-page="pageNavigation.currentPage" :page-size="pageNavigation.pageSize" layout="prev, pager, next" :total="pageNavigation.totalCount">
+        </el-pagination>
+    </div>
+    <div class="activity-dialog">
         <el-dialog title="提示" :visible.sync="deleteDialogShow" width="400px">
-            <span>你确定要删除 '{{ deleteMassage }}' 这个成员吗</span>
+            <span>你确定要删除 '{{deleteMassage}}' 这个活动吗</span>
             <span slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="deleteDialogShow = false">取 消</el-button>
                 <el-button type="danger" @click="doDeleteItem">确 定</el-button>
             </span>
         </el-dialog>
+
     </div>
 </div>
 </template>
@@ -59,14 +150,10 @@ import * as dateUtils from "../../utils/date";
 export default {
     data() {
         return {
-            default_value: "",
-            searchValue: "",
-            value: "",
+            activeName: 'all',
+            status: 0,
             loading: false,
             deleteDialogShow: false,
-            editorDialogShow: false,
-            editorCommitText: "修改活动",
-            editTitle: "编辑活动",
             deleteMassage: "",
             deleteTargetId: "",
             pageNavigation: {
@@ -74,59 +161,37 @@ export default {
                 totalCount: 0,
                 pageSize: 5,
             },
-            activity: [],
-            activityList: [],
-            personnelList: {
-                id: "",
-                nickName: "",
-                sex: "",
-                avatar: "",
-                phone: "",
-                email: "",
-                sign: "",
-                state: "",
-                createdTime: "",
-                updatedTime: "",
-                clubId: "",
-                club: {
-                    id: "",
-                    clubName: "",
-                },
-            },
-            item: {},
+            activity: []
         };
     },
     methods: {
+        edit(item) {
+            console.log(item)
+            //跳转到发布页面
+            this.$router.push({
+                'path': '/activity/add',
+                'name': '发布活动',
+                params: { activity: item }
+
+            });
+        },
         currentPageChange(page) {
             this.pageNavigation.currentPage = page;
-            this.getPersonnelList();
+            this.getActivityList();
         },
-
-        closeDialog() {
-            this.resetLooper();
-            this.editorDialogShow = false;
-        },
-
-        tableRowClassName({ row, rowIndex }) {
-            if (rowIndex === 1 || rowIndex === 5) {
-                return "warning-row";
-            } else if (rowIndex === 3 || rowIndex === 7) {
-                return "success-row";
-            }
-            return "";
-        },
-        formatDate(dateStr) {
-            let date = new Date(dateStr);
-            return dateUtils.formatDate(date, "yyyy-MM-dd");
+        //标签页切换事件
+        handleClick(tab, event) {
+            //0表示全部1表示已通过，2审核中，3已拒绝
+            this.status = tab.index;
+            this.getActivityList();
         },
         deleteItem(item) {
             //不是马上删除，而是给出警告提示
             this.deleteDialogShow = true;
-            this.deleteMassage = item.nickName;
             this.deleteTargetId = item.id;
         },
         doDeleteItem() {
-            club.deleteActivity(this.deleteTargetId).then((resp) => {
+            user.deleteActivity(this.deleteTargetId).then((resp) => {
                 if (resp.data.code === 200) {
                     this.getActivityList();
                 }
@@ -138,7 +203,7 @@ export default {
             user
                 .getActivityList(
                     this.pageNavigation.currentPage,
-                    this.pageNavigation.pageSize
+                    this.pageNavigation.pageSize, this.status
                 )
                 .then((response) => {
                     if (response.data.code === 200) {
@@ -158,50 +223,71 @@ export default {
 
     },
 
-    watch: {
-        dialogWidth(val) {
-            if (val - 100 > 1350) {
-                this.dialogWidth = 1350 + 'px'
-            } else {
-                this.dialogWidth = val - 100 + 'px'
-            }
-        }
-
-    }
 };
 </script>
 
 <style>
-.list-box {
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 5px;
+.box{
+    
+}
+.box .list-box {
+       margin-right: 20px;
+        
 }
 
-.el-table .warning-row {
-    background: oldlace;
+.el-card {
+    margin-top: 10px;
 }
 
-.el-table .success-row {
-    background: #f0f9eb;
+.el-card__body {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
 }
 
-.data-v-3cad7a59 {
-    background: #409eff;
+.el-card__body .item-title {
+    font-weight: 600;
+    line-height: 28px;
+    font-size: 18px;
 }
 
-.loop-list-box .el-table {
-    min-height: 300px;
+.el-card__body .item-title a {
+    color: #000;
+}
+
+.success-content .item-content {
+    margin-top: 10px;
+}
+
+.success-content .item-info {
+    width: 1000px;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 400;
+}
+
+.success-content .item-info .right-control {
+    float: right;
+}
+
+.success-content .item-info .right-control {
+    margin-left: 10px;
+    color: #666;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.success-content .item-info .right-control span {
+    margin-left: 10px;
+    color: #666;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 .user-list-page-navigation-bar {
     float: right;
     margin-right: 50px;
     margin-top: 10px;
-}
-
-.el-dialog {
-    width: 70%;
 }
 </style>

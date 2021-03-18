@@ -12,7 +12,7 @@
     <div class="activity-post-setting-part">
         <el-form ref="activity" :model="activity" label-width="80px">
             <el-form-item label="活动分类" required>
-                <el-select v-model="clubList.clubName" placeholder="请选择分类" size="medium" @change="currentSel">
+                <el-select v-model="activity.clubId" placeholder="请选择分类" size="medium" @change="currentSel">
                     <el-option v-for="item in clubList" :key="item.id" :label="item.clubName" :value="item.id">
                     </el-option>
                 </el-select>
@@ -46,7 +46,7 @@
         <div class="action-btn-container">
             <el-button plain size="small" @click="preView">全屏预览</el-button>
             <!-- <el-button plain size="medium">保存草稿</el-button> -->
-            <el-button type="primary" size="small" @click="postActivity">发布活动</el-button>
+            <el-button type="primary" size="small" @click="postActivity" v-text="postOrUpdate">发布活动</el-button>
         </div>
     </div>
     <!-- 图片上传dialog -->
@@ -90,6 +90,7 @@ export default {
     data() {
         return {
             onImageSelectFor: 'activity',
+            postOrUpdate:'发布活动',
             pageNavigation: {
                 currentPage: 1,
                 totalCount: 0,
@@ -98,6 +99,7 @@ export default {
             selectedImageIndex: 0,
             isImageSelectorShow: false,
             activity: {
+                id:"",
                 title: "",
                 summary: "",
                 content: "",
@@ -107,8 +109,9 @@ export default {
                 activityImg: "",
                 clubId: "",
             },
-            clubList: "",
+            clubList: [],
             images: [],
+            status: 0,
         };
     },
     methods: {
@@ -197,13 +200,14 @@ export default {
 
         currentSel(selVa) {
             //将clubName转化为clubId传入到activity.sponsorId内
-            this.activity.clubId = this.clubList.clubName;
+            this.activity.clubId = this.activity.clubId;
+            console.log("currentSel===>"+this.activity.clubId)
         },
         //获取全部的社团不分页
         getClubList() {
-            club.getClubList(0, 0).then((response) => {
+            club.clubList().then((response) => {
                 if (response.data.code === 200) {
-                    this.clubList = response.data.data.list;
+                    this.clubList = response.data.data;
                 }
             });
         },
@@ -242,6 +246,16 @@ export default {
         },
     },
     mounted() {
+        //获取其他页面的传来的数据
+
+        if (this.$route.params.activity != null) {
+            this.postOrUpdate = "更新"
+            this.activity = this.$route.params.activity;
+            this.getClubList();
+            this.clubList.clubId = this.activity.clubId;
+            console.log(this.clubList.clubId)
+            this.listImages();
+        }
         this.getClubList();
         this.listImages();
     },

@@ -27,12 +27,12 @@ export default {
 </script>
 
 <style scoped>
-.content-box {
-  padding: 5px;
-}
+/* .content-box {
+  padding: 0px;
+} */
 
 .right-content-container {
-  min-width: 1000px;
+  min-width: 100%;
   min-height: auto;
 } 
 

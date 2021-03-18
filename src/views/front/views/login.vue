@@ -3,7 +3,9 @@
     <!--顶部内容-->
     <div class="admin-login-header-box">
       <div class="admin-login-header-center center">
-        <div class="admin-login-logo">社团管理系统 | 登录</div>
+        <div class="admin-login-logo">
+          <a href="/index">社团管理系统 | 登录</a>
+        </div>
       </div>
     </div>
     <!--中间内容-->
@@ -35,7 +37,7 @@
   </div>
 </template>
 <script>
-import login from "../../api/login";
+import login from "../../../api/login";
 export default {
   data() {
     return {
@@ -82,7 +84,7 @@ export default {
           window.localStorage.setItem("cms_token", cms_token);
           window.localStorage.setItem("avatar", response.data.data.avatar);
           window.localStorage.setItem("name", response.data.data.name);
-          this.$router.push({ path: "/index" });
+          this.$router.push({ path: "/admin" });
         } else {
           this.updateVerifyCode();
         }
@@ -146,6 +148,12 @@ export default {
   color: #fff;
   font-size: 20px;
   font-weight: 600;
+}
+.admin-login-logo a{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration-line: none;
 }
 .login-center-box .el-form-item__label {
   background: #fbfbfb;
