@@ -1,19 +1,19 @@
 <template>
   <div class="box">
-    <div class="search-box">
-      <el-form style="margin-top: 10px;margin-left: 10px;font-size: large;font-weight: bold">
-        <el-form-item label="社团名:">
-          <el-input type="text" style="width: 200px" v-model="searchValue" @keypress.enter.native="searchClub"></el-input>
-          <el-button class="login-button" type="primary" @click="searchClub">搜索</el-button>
-        </el-form-item>
-      </el-form>
+<!--    <div class="search-box">-->
+<!--      <el-form style="margin-top: 10px;margin-left: 10px;font-size: large;font-weight: bold">-->
+<!--        <el-form-item label="社团名:">-->
+<!--          <el-input type="text" style="width: 200px" v-model="searchValue" @keypress.enter.native="searchClub"></el-input>-->
+<!--          <el-button class="login-button" type="primary" @click="searchClub">搜索</el-button>-->
+<!--        </el-form-item>-->
+<!--      </el-form>-->
 
-    </div>
+<!--    </div>-->
 
     <div class="list-box">
     <el-table
       v-loading="loading"
-      :data="clubLists"
+      :data="clubLists.filter(data => !search || data.clubName.toLowerCase().includes(search.toLowerCase()))"
       :row-class-name="tableRowClassName"
       style="width: 100%"
     class="el-table">
@@ -83,7 +83,15 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="操作">
+      <el-table-column
+        align="right">
+        <template slot="header" slot-scope="scope">
+          <el-input
+            v-model="search"
+            size="mini"
+            placeholder="输入关键字搜索"/>
+        </template>
+
         <template slot-scope="scope">
           <el-button @click="edit(scope.row)" type="primary" size="mini">编辑</el-button>
           <el-button @click="deleteItem(scope.row)" type="danger" size="mini">删除</el-button>
@@ -189,6 +197,7 @@ import * as dateUtils from '../../utils/date'
 export default {
   data () {
     return {
+      search: '',
       status:0,
       searchValue:'',
       value:'',

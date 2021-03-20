@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import login from "../views/front/views/login";
+import login from "../views/login";
 import RightContent from "../layout/RightContent";
 import BaseView from "../layout/BaseView";
 import dashboard from "../views/dashboard/index";
@@ -11,23 +11,22 @@ import listPersonnel from '../views/content/listPersonnel'
 import addPersonnel from '../views/content/addPersonnel'
 import listActivity from '../views/content/listActivity'
 import addActivity from '../views/content/addActivity'
-//前台
-import FrontBaseView from '../views/front/layout/BaseView'
-import index from '../views/front/views/content/index'
-import activity from '../views/front/views/content/activity'
-import association from '../views/front/views/content/association'
-import about from '../views/front/views/content/about'
+//权限
+import issue from '../views/content/power/issue'
+import manage from '../views/content/power/manage'
+
 Vue.use(VueRouter)
 
 export const routes = [
   {
-    path: '/admin',
+    path: '/',
     name: 'BaseView',
+    redirect: "/index",
     component: BaseView,
     children: [
       {
         /*仪表盘*/
-        path: '/admin',
+        path: '/index',
         component: dashboard,
         name: '首页',
         icon: 'el-icon-s-home'
@@ -96,6 +95,29 @@ export const routes = [
       },
 
       {
+        path: '/power',
+        name: '权限管理',
+        icon: 'el-icon-s-management',
+        component: RightContent,
+        children: [
+          {
+            path: 'issue',
+            component: issue,
+            icon: 'el-icon-edit-outline',
+            name: '分配角色',
+          },
+          {
+            path: 'manage',
+            component: manage,
+            icon: 'el-icon-edit-outline',
+            name: '角色管理',
+          },
+
+        ]
+      },
+
+
+      {
         path: '/user',
         name: '用户',
         icon: 'el-icon-tickets',
@@ -112,39 +134,7 @@ export const routes = [
     ]
   },
   //前台
-  {
-    path: '/',
-    name: 'FrontBaseView',
-    redirect: "/index",
-    component: FrontBaseView,
-    children: [
-      {
-        //首页
-        path: '/index',
-        name: '前端首页',
-        component:index,
-      },
-      {
-        //首页
-        path: '/ac',
-        name: '活动页面',
-        component:activity,
-      },
-      {
-        //首页
-        path: '/association',
-        name: '社团页面',
-        component:association,
-      },
-      {
-        //关于
-        path: '/about',
-        name: '关于页面',
-        component:about,
-      },
-    ]
 
-  },
   {
     path: '/login',
     name: "login",
@@ -165,14 +155,9 @@ router.beforeEach((to, form, next) => {
   // next 是一个函数，表示放行
   //     next()  放行    next('/login')  强制跳转
   if (to.path === '/login') return next()
-  if (to.path === '/index') return next()
-  if (to.path === '/association') return next()
-  if (to.path === '/ac') return next()
-  if (to.path === '/about') return next()
-  if (to.path === '/join') return next()
   // 获取token
   let Authorization = window.localStorage.getItem('cms_token');
-  if (!Authorization) return next('/')
+  if (!Authorization) return next('/login')
   next()
 })
 

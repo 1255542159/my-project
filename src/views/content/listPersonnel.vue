@@ -1,30 +1,30 @@
 <template>
   <div class="box">
-    <div class="search-box">
-      <el-form
-        style="
-          margin-top: 10px;
-          margin-left: 10px;
-          font-size: large;
-          font-weight: bold;
-        "
-      >
-        <el-form-item label="按昵称:">
-          <el-input
-            type="text"
-            style="width: 200px"
-            v-model="searchValue"
-            @keypress.enter.native="searchPersonnel"
-          ></el-input>
-          <el-button
-            class="login-button"
-            type="primary"
-            @click="searchPersonnel"
-            >搜索</el-button
-          >
-        </el-form-item>
-      </el-form>
-    </div>
+<!--    <div class="search-box">-->
+<!--      <el-form-->
+<!--        style="-->
+<!--          margin-top: 10px;-->
+<!--          margin-left: 10px;-->
+<!--          font-size: large;-->
+<!--          font-weight: bold;-->
+<!--        "-->
+<!--      >-->
+<!--        <el-form-item label="按昵称:">-->
+<!--          <el-input-->
+<!--            type="text"-->
+<!--            style="width: 200px"-->
+<!--            v-model="searchValue"-->
+<!--            @keypress.enter.native="searchPersonnel"-->
+<!--          ></el-input>-->
+<!--          <el-button-->
+<!--            class="login-button"-->
+<!--            type="primary"-->
+<!--            @click="searchPersonnel"-->
+<!--            >搜索</el-button-->
+<!--          >-->
+<!--        </el-form-item>-->
+<!--      </el-form>-->
+<!--    </div>-->
 
     <div class="list-box">
       <el-table
@@ -78,7 +78,14 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作">
+        <el-table-column
+        align="right">
+          <template slot="header" slot-scope="scope">
+            <el-input
+              v-model="search"
+              size="mini"
+              placeholder="输入关键字搜索"/>
+          </template>
           <template slot-scope="scope">
             <el-button @click="edit(scope.row)" type="primary" size="mini"
               >编辑</el-button
@@ -195,6 +202,7 @@ export default {
       editTitle: "编辑人员",
       deleteMassage: "",
       deleteTargetId: "",
+      search:'',
       pageNavigation: {
         currentPage: 1,
         totalCount: 0,
@@ -382,7 +390,7 @@ export default {
     getClubList() {
       club.getClubList(0, 0,this.status).then((response) => {
         if (response.data.code === 200) {
-          
+
           this.clubList = response.data.data.list;
         }
       });

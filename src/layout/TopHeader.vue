@@ -47,7 +47,7 @@ export default {
           window.localStorage.removeItem("cms_token")
           //跳转到登录页面
           this.$router.push({
-            path:'/'
+            path:'/login'
           })
         })
       }
