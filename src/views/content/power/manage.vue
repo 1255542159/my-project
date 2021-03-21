@@ -13,8 +13,6 @@
         <el-table-column label="角色描述" prop="roleDesc"></el-table-column>
         <el-table-column label="操作" >
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" size="mini">编辑</el-button>
-            <el-button type="danger" icon="el-icon-delete"size="mini">删除</el-button>
             <el-button type="warning" icon="el-icon-setting"size="mini" @click="showSetRightDialog(scope.row)">分配权限</el-button>
           </template>
         </el-table-column>
@@ -60,7 +58,7 @@ export default {
     }
   },
   methods: {
-    //分配权限确定
+    //分配权限确定按钮
     allotRights(){
       //拿到所有的key
       const keys = [
@@ -68,7 +66,15 @@ export default {
         ...this.$refs.treeRef.getHalfCheckedKeys()
       ]
       const  idStr = keys.join(',')
-      console.log(keys);
+      admin.roleManage(this.roleId,idStr).then((response) =>{
+        if(response.data.code === 200){
+          this.$message.success(response.data.msg);
+        }else {
+          this.$message.error(response.data.msg);
+        }
+      })
+      this.getRoleList();
+      this.setRightDialogVisiable = false;
     },
     getRoleList () {
       admin.roleList().then((res) => {

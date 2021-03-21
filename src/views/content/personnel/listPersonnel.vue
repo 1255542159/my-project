@@ -185,9 +185,9 @@
 </template>
 
 <script>
-import club from "../../api/club";
-import user from "../../api/user";
-import * as dateUtils from "../../utils/date";
+import club from "../../../api/club";
+import user from "../../../api/user";
+import * as dateUtils from "../../../utils/date";
 
 export default {
   data() {
@@ -206,7 +206,7 @@ export default {
       pageNavigation: {
         currentPage: 1,
         totalCount: 0,
-        pageSize: 5,
+        pageSize: 10,
       },
       personnelLists: [],
       clubList: [],

@@ -145,8 +145,8 @@
 </template>
 
 <script>
-import user from "../../api/user";
-import * as dateUtils from "../../utils/date";
+import user from "../../../api/user";
+import * as dateUtils from "../../../utils/date";
 export default {
     data() {
         return {
@@ -228,11 +228,11 @@ export default {
 
 <style>
 .box{
-    
+
 }
 .box .list-box {
        margin-right: 20px;
-        
+
 }
 
 .el-card {

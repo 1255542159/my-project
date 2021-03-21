@@ -13,10 +13,29 @@ export default{
       method:'get'
     })
   },
-  powerOwnerList(id){
+  roleManage(roleId,idStr){
     return request({
-      url:'/api/admin/power/list?id='+id,
-      method:'get'
+      url:'/api/admin/role/manage/'+roleId+'/'+idStr,
+      method:'post'
     })
   },
+  getPersonnelList(page,size,status){
+    return request({
+      url: '/api/admin/personnelList/'+page+'/'+size,
+      method: 'get',
+      params:{
+        status:status,
+        keyWords:''
+      }
+    })
+  },
+
+  roleIssue(userId,roleId){
+    return request({
+      url:'/api/admin/role/issue/'+userId+'/'+roleId,
+      method:'post'
+    })
+  },
+
+
 }

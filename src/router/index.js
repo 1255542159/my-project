@@ -5,15 +5,26 @@ import RightContent from "../layout/RightContent";
 import BaseView from "../layout/BaseView";
 import dashboard from "../views/dashboard/index";
 import userInfo from '../views/content/userInfo'
-import listClub from '../views/content/listClub'
-import addClub from '../views/content/addClub'
-import listPersonnel from '../views/content/listPersonnel'
-import addPersonnel from '../views/content/addPersonnel'
-import listActivity from '../views/content/listActivity'
-import addActivity from '../views/content/addActivity'
+//活动
+import listActivity from '../views/content/activity/listActivity'
+import addActivity from '../views/content/activity/addActivity'
+//人员
+import listPersonnel from '../views/content/personnel/listPersonnel'
+import addPersonnel from '../views/content/personnel/addPersonnel'
+//社团
+import listClub from '../views/content/club/listClub'
+import addClub from '../views/content/club/addClub'
 //权限
 import issue from '../views/content/power/issue'
 import manage from '../views/content/power/manage'
+//审核
+import activity from '../views/content/audit/activity'
+import leave from '../views/content/audit/leave'
+import join from '../views/content/audit/join'
+import club from '../views/content/audit/club'
+//申请
+import joinApply from '../views/content/apply/join'
+import leaveApply from '../views/content/apply/leave'
 
 Vue.use(VueRouter)
 
@@ -115,7 +126,60 @@ export const routes = [
 
         ]
       },
+      {
+        path: '/audit',
+        name: '审核管理',
+        icon: 'el-icon-s-check',
+        component: RightContent,
+        children: [
+          {
+            path: 'activity',
+            component: activity,
+            icon: 'el-icon-edit-outline',
+            name: '活动审核',
+          },
+          {
+            path: 'leave',
+            component: leave,
+            icon: 'el-icon-edit-outline',
+            name: '请假审核',
+          },
+          {
+            path: 'join',
+            component: join,
+            icon: 'el-icon-edit-outline',
+            name: '入团审核',
+          },
+          {
+            path: 'club',
+            component: club,
+            icon: 'el-icon-edit-outline',
+            name: '社团审核',
+          },
 
+        ]
+      },
+      {
+        path: '/apply',
+        name: '申请管理',
+        icon: 'el-icon-s-management',
+        component: RightContent,
+        children: [
+          {
+            path: 'join',
+            component: joinApply,
+            icon: 'el-icon-edit-outline',
+            name: '入团申请',
+          },
+          {
+            path: 'leave',
+            component: leaveApply,
+            icon: 'el-icon-edit-outline',
+            name: '角色管理',
+          },
+
+        ]
+      },
 
       {
         path: '/user',

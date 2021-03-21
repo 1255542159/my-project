@@ -61,19 +61,19 @@
         </el-form>
     </div>
     <div class="user-info-dialog">
-        <avatar-upload field="file" 
-        @crop-upload-success="cropUploadSuccess" 
-        @crop-upload-fail="cropUploadFail" 
-        v-model="showAvatar" :width="300" :height="300" 
-        url="/api/user/image/uploadImage?original=avatar" 
+        <avatar-upload field="file"
+        @crop-upload-success="cropUploadSuccess"
+        @crop-upload-fail="cropUploadFail"
+        v-model="showAvatar" :width="300" :height="300"
+        url="/api/user/image/uploadImage?original=avatar"
         img-format="png"></avatar-upload>
     </div>
 </div>
 </template>
 
 <script>
-import club from "../../api/club";
-import user from "../../api/user";
+import club from "../../../api/club";
+import user from "../../../api/user";
 import avatarUpload from 'vue-image-crop-upload';
 export default {
     components: {

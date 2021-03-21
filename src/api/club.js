@@ -23,34 +23,25 @@ clubList(){
     return request({
       url: '/api/club/addClub',
       method: 'post',
-      data:{
-        "clubCreator": club.clubCreator,
-        "clubDesc": club.clubDesc,
-        "clubImg": club.clubImg,
-        "clubIntroduce": club.clubIntroduce,
-        "clubName": club.clubName,
-        "createdTime": "",
-        "id": '',
-        "isDelete": '',
-        "leaderId": club.leaderId,
-        "updatedTime": ""
-      }
+      data:club
+        // "clubCreator": club.clubCreator,
+        // "clubDesc": club.clubDesc,
+        // "clubImg": club.clubImg,
+        // "clubIntroduce": club.clubIntroduce,
+        // "clubName": club.clubName,
+        // "createdTime": "",
+        // "id": '',
+        // "isDelete": '',
+        // "leaderId": club.leaderId,
+        // "updatedTime": ""
+
     })
   },
   updateClub(club){
     return request({
       url:'/api/club/updateClub',
       method:'post',
-      data:{
-        "clubCreator": club.clubCreator,
-        "clubDesc": club.clubDesc,
-        "clubImg": club.clubImg,
-        "clubIntroduce": club.clubIntroduce,
-        "clubName": club.clubName,
-        "id": club.id,
-        "leaderId": club.leaderId,
-        "isDelete": club.isDelete
-      }
+      data:club
     })
   },
 
@@ -67,5 +58,6 @@ clubList(){
       method: 'get'
     })
   },
+
 
 }

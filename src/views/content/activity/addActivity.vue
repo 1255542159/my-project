@@ -80,10 +80,10 @@
 </template>
 
 <script>
-import club from "../../api/club";
-import user from "../../api/user";
-import editor from '../../../lib/mavon-editor/mavon-editor';
-import '../../../lib/mavon-editor/css/index.css';
+import club from "../../../api/club";
+import user from "../../../api/user";
+import editor from '../../../../lib/mavon-editor/mavon-editor';
+import '../../../../lib/mavon-editor/css/index.css';
 import Vue from 'vue'
 Vue.use(editor);
 export default {
@@ -185,12 +185,13 @@ export default {
                 this.showWarrning("结束时间不能为空");
                 return;
             }
-            // if(this.activity.activityImg == ''){
+            // if(this.activity.vue.activityImg == ''){
             //   this.showWarrning("封面不能为空");
             //   return;
             // }
             user.postActivity(this.activity).then((response) => {
                 if (response.data.code === 200) {
+                  this.activity = '';
                     this.showSuccess(response.data.msg);
                 } else {
                     this.showError(response.data.msg);

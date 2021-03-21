@@ -41,7 +41,7 @@
               </div>
               <div  class="fast-way-list">
                 <div class="fast-way-item">
-                  <router-link class="el-icon-edit" to="/content/postArticle">写文章</router-link>
+                  <router-link class="el-icon-edit" to="/activity/add">发布活动</router-link>
                 </div>
                 <div class="fast-way-item">
                   <router-link class="el-icon-edit" to="/settings/web-site-info">修改网站消息</router-link>
@@ -50,7 +50,7 @@
                   <router-link class="el-icon-edit" to="/settings/friend-link">添加友情链接</router-link>
                 </div>
                 <div class="fast-way-item">
-                  <router-link class="el-icon-edit" to="/content/ManageArticle">文章管理</router-link>
+                  <router-link class="el-icon-edit" to="/activity/list">活动管理</router-link>
                 </div>
                 <div class="fast-way-item">
                   <router-link class="el-icon-edit" to="/operation/loop">轮播图管理</router-link>

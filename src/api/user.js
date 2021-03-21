@@ -51,6 +51,14 @@ export default {
       data: activity
     })
   },
+
+updateActivity(activity){
+  return request({
+    url:'/api/user/update/activity',
+    method: 'post',
+    data: activity
+  })
+},
   getActivityList(page,size,status){
     return request({
       url: '/api/user/list/activity/'+page+'/'+size,
@@ -73,4 +81,14 @@ export default {
       method:'delete'
     })
   },
+
+  auditJoin(audit){
+    return request({
+      url:'/api/user/audit/join',
+      method:'post',
+      data:audit
+    })
+  }
+
+
 }
