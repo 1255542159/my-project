@@ -254,10 +254,6 @@ export default {
   background: #fff;
 }
 
-.el-dialog__header {
-  display: none;
-}
-
 .image-selector-list .el-radio-button__inner,
 .el-radio-button:first-child .el-radio-button__inner,
 .el-radio-button:last-child .el-radio-button__inner {

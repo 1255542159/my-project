@@ -37,5 +37,20 @@ export default{
     })
   },
 
+  carouselList(){
+    return request({
+      url:'/api/portal/list/carousel',
+      method:'get'
+    })
+  },
+
+  carouselDelete(id){
+    return request({
+      url:'/api/admin/delete/carousel/'+id,
+      method:'post'
+    })
+  }
+
+
 
 }

@@ -24,17 +24,6 @@ clubList(){
       url: '/api/club/addClub',
       method: 'post',
       data:club
-        // "clubCreator": club.clubCreator,
-        // "clubDesc": club.clubDesc,
-        // "clubImg": club.clubImg,
-        // "clubIntroduce": club.clubIntroduce,
-        // "clubName": club.clubName,
-        // "createdTime": "",
-        // "id": '',
-        // "isDelete": '',
-        // "leaderId": club.leaderId,
-        // "updatedTime": ""
-
     })
   },
   updateClub(club){
@@ -59,5 +48,20 @@ clubList(){
     })
   },
 
+  //查询申请列表
+  auditList(page,size,type) {
+    return request({
+      url: '/api/club/auditList/'+page+'/'+size+'/'+type,
+      method: 'get'
+    })
+  },
 
+  //查询申请列表
+  agreeAudit(audit) {
+    return request({
+      url: '/api/club//audit/agree',
+      method: 'post',
+      data:audit
+    })
+  },
 }

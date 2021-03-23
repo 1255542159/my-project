@@ -16,118 +16,133 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="时长">
+        <el-form-item label="时长" required>
           <el-select v-model="audit.leaveTime" placeholder="请选择" @change="currentTime" :disabled="visible">
             <el-option v-for="item in time" :key="item.type" :label="item.label" :value="item.type">
             </el-option>
           </el-select>
         </el-form-item>
 
-
         <el-form-item label="描述" required>
           <el-input type="textarea" :rows="3" placeholder="入团理由" v-model="audit.description">
           </el-input>
         </el-form-item>
-
         <el-form-item>
-          <el-button type="primary" @click="apply" style="margin-left: 65px">申请</el-button>
+          <el-button type="primary" @click="apply" style="margin-left: 65px" v-text="postOrUpdate">申请</el-button>
         </el-form-item>
+
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
-import club from "../../../api/club";
-import user from "../../../api/user";
+import club from '../../../api/club'
+import user from '../../../api/user'
+
 export default {
-  data() {
+  data () {
     return {
-      dep:true,
-      visible:true,
+      postOrUpdate:'申请',
+      dep: true,
+      visible: true,
       showAvatar: false,
       clubList: [],
-      audit:{
-        clubId:'',
-        description:'',
-        type:"",
-        leaveTime:'',
+      audit: {
+        clubId: '',
+        description: '',
+        type: '',
+        leaveTime: '',
       },
-      typeData:[{
-        type:'join',
-        label:'入团'
-      },{
-        type:'quit',
-        label:'退团'
-      },{
-        type:'leave',
-        label:'请假'
+      typeData: [{
+        type: 'join',
+        label: '入团'
+      }, {
+        type: 'quit',
+        label: '退团'
+      }, {
+        type: 'leave',
+        label: '请假'
       }
       ],
-      time:[{
-        type:1,
-        label:'1天'
-      },{
-        type:2,
-        label:'2天'
+      time: [{
+        type: 1,
+        label: '1天'
+      }, {
+        type: 2,
+        label: '2天'
       },
         {
-        type:3,
-        label:'3天'
-      }
+          type: 3,
+          label: '3天'
+        }
       ]
 
-
-    };
+    }
   },
   methods: {
-    currentTime(selVa){
-      this.audit.leaveTime = selVa;
+    currentTime (selVa) {
+      this.audit.leaveTime = selVa
     },
-    currentSel(selVa) {
-      this.audit.clubId = selVa;
+    currentSel (selVa) {
+      this.audit.clubId = selVa
     },
-    currentType(selVa){
-      this.audit.type = selVa;
-      if(selVa == "leave"){
-        this.visible = false;
-        this.dep = true;
-      }else {
-        this.visible = true;
-        this.dep = false;
+    currentType (selVa) {
+      this.audit.type = selVa
+      if (selVa == 'leave') {
+        this.visible = false
+        this.dep = true
+      } else {
+        this.visible = true
+        this.dep = false
       }
     },
     //获取全部的社团不分页
-    getClubList() {
+    getClubList () {
       club.clubList().then((response) => {
         if (response.data.code === 200) {
-          this.clubList = response.data.data;
+          this.clubList = response.data.data
         }
-      });
+      })
     },
-    apply() {
-      //检查数据
-      if (this.audit.clubId=== "") {
-        this.$message.error("部门不能为空");
-        return;
+    apply () {
+      //根据选择类型来进行不同的判断
+      if (this.audit.type === 'leave') {
+        //请假类型
+        if (this.audit.leaveTime === '') {
+          this.$message.error('请假时长不能为空')
+          return
+        }
+
+      }else {
+        //检查数据
+        if (this.audit.clubId === '') {
+          this.$message.error('部门不能为空')
+          return
+        }
       }
-      if (this.audit.description === "") {
-        this.$message.error("理由不能为空");
-        return;
+      if (this.audit.description === '') {
+        this.$message.error('理由不能为空')
+        return
       }
+      //判断是更新还是申请
       user.auditJoin(this.audit).then((resp) => {
         if (resp.data.code === 200) {
-          this.$message.success(resp.data.msg);
+          this.$message.success(resp.data.msg)
           //成功后将输入框置空
-          this.audit = "";
+          this.audit = ''
         }
-      });
+      })
     },
   },
-  mounted() {
-    this.getClubList();
+  mounted () {
+    if (this.$route.params.audit != null) {
+      this.postOrUpdate = "更新"
+      this.audit = this.$route.params.audit;
+    }
+    this.getClubList()
   },
-};
+}
 </script>
 
 <style>
@@ -142,5 +157,4 @@ export default {
   color: #DCDFE6;
   font-size: 20px;
 }
-
 </style>

@@ -84,11 +84,22 @@ updateActivity(activity){
 
   auditJoin(audit){
     return request({
-      url:'/api/user/audit/join',
+      url:'/api/user/apply/join',
       method:'post',
       data:audit
     })
-  }
+  },
+  auditList(page,size){
+    return request({
+      url:'/api/user/apply/list/'+page+"/"+size,
+      method:'get'
+    })
+  },
 
-
+auditDelete(id){
+  return request({
+    url:'/api/user/apply/delete/'+id,
+    method:'post'
+  })
+},
 }

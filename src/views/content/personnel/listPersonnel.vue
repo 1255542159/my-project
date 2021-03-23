@@ -1,31 +1,5 @@
 <template>
   <div class="box">
-<!--    <div class="search-box">-->
-<!--      <el-form-->
-<!--        style="-->
-<!--          margin-top: 10px;-->
-<!--          margin-left: 10px;-->
-<!--          font-size: large;-->
-<!--          font-weight: bold;-->
-<!--        "-->
-<!--      >-->
-<!--        <el-form-item label="按昵称:">-->
-<!--          <el-input-->
-<!--            type="text"-->
-<!--            style="width: 200px"-->
-<!--            v-model="searchValue"-->
-<!--            @keypress.enter.native="searchPersonnel"-->
-<!--          ></el-input>-->
-<!--          <el-button-->
-<!--            class="login-button"-->
-<!--            type="primary"-->
-<!--            @click="searchPersonnel"-->
-<!--            >搜索</el-button-->
-<!--          >-->
-<!--        </el-form-item>-->
-<!--      </el-form>-->
-<!--    </div>-->
-
     <div class="list-box">
       <el-table
         v-loading="loading"
@@ -34,6 +8,7 @@
         style="width: 100%"
         class="el-table"
       >
+        <el-table-column  width="50" label="序号" type="index"> </el-table-column>
         <el-table-column prop="sno" label="学号" width="110"> </el-table-column>
         <el-table-column prop="name" label="姓名" width="120">
         </el-table-column>

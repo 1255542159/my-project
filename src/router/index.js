@@ -20,11 +20,12 @@ import manage from '../views/content/power/manage'
 //审核
 import activity from '../views/content/audit/activity'
 import leave from '../views/content/audit/leave'
-import join from '../views/content/audit/join'
 import club from '../views/content/audit/club'
 //申请
-import joinApply from '../views/content/apply/join'
-import leaveApply from '../views/content/apply/leave'
+import apply from '../views/content/apply/apply'
+import mineApply from '../views/content/apply/mineApply'
+//系统设置
+import Looper from '../views/content/system/looper'
 
 Vue.use(VueRouter)
 
@@ -145,12 +146,6 @@ export const routes = [
             name: '请假审核',
           },
           {
-            path: 'join',
-            component: join,
-            icon: 'el-icon-edit-outline',
-            name: '入团审核',
-          },
-          {
             path: 'club',
             component: club,
             icon: 'el-icon-edit-outline',
@@ -167,16 +162,32 @@ export const routes = [
         children: [
           {
             path: 'join',
-            component: joinApply,
+            component: apply,
             icon: 'el-icon-edit-outline',
-            name: '入团申请',
+            name: '申请',
           },
           {
-            path: 'leave',
-            component: leaveApply,
+            path: 'list',
+            component: mineApply,
             icon: 'el-icon-edit-outline',
-            name: '角色管理',
+            name: '我的申请',
           },
+        ]
+      },
+
+      {
+        path: '/system',
+        name: '申请管理',
+        icon: 'el-icon-s-management',
+        component: RightContent,
+        children: [
+          {
+            path: 'list',
+            component: Looper,
+            icon: 'el-icon-edit-outline',
+            name: '轮播图',
+          },
+
 
         ]
       },
@@ -208,7 +219,6 @@ export const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
   routes
 })
 
