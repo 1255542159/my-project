@@ -26,8 +26,8 @@
         </el-table-column>
         <el-table-column prop="phone" label="电话" width="120">
         </el-table-column>
-        <el-table-column prop="email" label="邮箱" width="200">
-        </el-table-column>
+<!--        <el-table-column prop="email" label="邮箱" width="200">-->
+<!--        </el-table-column>-->
         <el-table-column label="隶属于部门">
           <template slot-scope="scope">
             <el-popover
@@ -397,7 +397,6 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 10px;
-  margin-top: 5px;
 }
 
 .el-table .warning-row {

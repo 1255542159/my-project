@@ -169,7 +169,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .content-box {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -189,7 +189,10 @@ export default {
     line-height: 30px;
     text-align: center;
 }
-
+#accountSetting .content .user-info img {
+  height: 100px;
+  width: 100px;
+}
 #accountSetting .content .user-info .update-avatar-tips {
     opacity: 0.1;
     text-align: center;

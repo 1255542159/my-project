@@ -25,11 +25,6 @@
                             <div class="user-avatar-container" @click="showAvatarDialog">
                                 <el-avatar :src="user.avatar"></el-avatar>
                             </div>
-
-                            <!-- <el-upload class="avatar-uploader" action="/api/user/image/uploadImage?original=avatar" :show-file-list="false" :on-success="handleAvatarSuccess">
-                                <i v-if="user.avatar ===''" class="el-icon-plus"></i>
-                                <img v-else :src="user.avatar" />
-                            </el-upload> -->
                         </el-form-item>
                     </div>
                 </el-col>
@@ -151,47 +146,34 @@ export default {
         addPersonnel() {
             //检查数据
             if (this.user.sno === "") {
-                this.showWarrning("学号不能为空");
+                this.$message.error("学号不能为空");
                 return;
             }
             if (this.user.name === "") {
-                this.showWarrning("姓名不能为空");
+              this.$message.error("姓名不能为空");
                 return;
             }
             if (this.user.password === "") {
-                this.showWarrning("密码不能为空");
+              this.$message.error("密码不能为空");
                 return;
             }
             if (this.user.sex === "") {
-                this.showWarrning("性别不能为空");
+              this.$message.error("性别不能为空");
                 return;
             }
             if (this.user.phone === "") {
-                this.showWarrning("手机号不能为空");
+              this.$message.error("手机号不能为空");
                 return;
             }
             user.addPersonnel(this.user).then((resp) => {
-                if (resp.data.code === 200) {
-                    this.showSuccess(resp.data.msg);
+                    this.$message.success(resp.data.msg);
                     //成功后将输入框置空
                     this.user = "";
-                }
+
             });
         },
-        showWarrning(msg) {
-            this.$message({
-                message: msg,
-                type: "warning",
-                center: true,
-            });
-        },
-        showSuccess(msg) {
-            this.$message({
-                message: msg,
-                type: "success",
-                center: true,
-            });
-        },
+
+
     },
     mounted() {
         this.getClubList();

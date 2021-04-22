@@ -4,7 +4,7 @@
     <div class="content-box">
       <router-view></router-view>
     </div>
-   
+
   </div>
 </template>
 
@@ -27,13 +27,13 @@ export default {
 </script>
 
 <style scoped>
-/* .content-box {
+.content-box {
   padding: 0px;
-} */
+}
 
 .right-content-container {
   min-width: 100%;
   min-height: auto;
-} 
+}
 
 </style>

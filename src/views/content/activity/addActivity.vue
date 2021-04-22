@@ -193,8 +193,6 @@ export default {
                 if (response.data.code === 200) {
                   this.activity = '';
                     this.showSuccess(response.data.msg);
-                } else {
-                    this.showError(response.data.msg);
                 }
             });
         },

@@ -5,8 +5,7 @@
       class="el-menu-vertical-demo"
       :collapse="$store.getters.isCollapse"
       background-color="#FFFFFF"
-      active-text-color="#FFFFFF"
-    >
+      active-text-color="#FFFFFF">
       <template v-for="(item, index) in menuList.data">
         <router-link :to="item.path" v-if="!item.childMenu" :key="index">
           <el-menu-item :index="index + ''">
@@ -40,7 +39,6 @@
 import login from "../api/login";
 export default {
   name: "LeftMenu",
-  data: [],
   data() {
     return {
       icon: "el-icon-s-fold",

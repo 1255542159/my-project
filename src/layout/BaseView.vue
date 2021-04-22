@@ -62,19 +62,31 @@ export default {
   border-right: solid 1px #e6e6e6;
   line-height: 50px;
 }
+
+
 .el-main {
-  padding: 0;
+  display: block;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -ms-flex-preferred-size: auto;
+  flex-basis: auto;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0px;
 }
+
 .main-container {
-  position: absolute;
-  top: 46px;
-  bottom: 0;
-  width: 100%;
+position: absolute;
+top: 46px;
+bottom: 0;
+width: 100%;
 }
 .rightPart {
-  height: 100%;
-  width: 100%;
-  overflow-y: scroll;
+height: 100%;
+width: 100%;
+overflow-y: scroll;
 }
 
 </style>

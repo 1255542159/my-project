@@ -28,6 +28,9 @@
                 <el-button class="login-button" type="primary" @click="doLogin"
                   >登录</el-button
                 >
+                <el-button class="login-button" type="danger" @click="doRegister"
+                >注册</el-button
+                >
               </el-form-item>
             </el-form>
           </el-col>
@@ -64,7 +67,7 @@ export default {
       //todo：
       //发起登录
       //检查数据，向服务器提交数据，处理结果
-      if (this.user.userName === "") {
+      if (this.user.username === "") {
         this.toastE("账户不能为空");
         return;
       }
@@ -90,6 +93,11 @@ export default {
         }
       });
     },
+
+
+    doRegister(){
+      this.$router.push({ path: "/register" });
+    },
     updateVerifyCode() {
       this.captchaPath =
         "http://localhost:8080/common/captcha?captcha_key=" +
@@ -105,7 +113,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .captcha-code {
   cursor: pointer;
   vertical-align: middle;

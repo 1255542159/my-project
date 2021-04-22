@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from "../views/login";
+import register from "../views/register";
 import RightContent from "../layout/RightContent";
 import BaseView from "../layout/BaseView";
 import dashboard from "../views/dashboard/index";
@@ -215,6 +216,11 @@ export const routes = [
     name: "login",
     component: login,
   },
+  {
+    path: '/register',
+    name: "register",
+    component: register,
+  },
 
 ]
 
@@ -229,6 +235,7 @@ router.beforeEach((to, form, next) => {
   // next 是一个函数，表示放行
   //     next()  放行    next('/login')  强制跳转
   if (to.path === '/login') return next()
+  if (to.path === '/register') return next()
   // 获取token
   let Authorization = window.localStorage.getItem('cms_token');
   if (!Authorization) return next('/login')

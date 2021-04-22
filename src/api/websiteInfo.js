@@ -14,6 +14,20 @@ export default {
     })
   },
 
+  getActivityCount () {
+    return request({
+      url: `api/admin/web_site_info/activity_count`,
+      method: 'get'
+    })
+  },
+
+  getLoginLog () {
+    return request({
+      url: `api/admin/web_site_info/loginLog`,
+      method: 'get'
+    })
+  },
+
   getSeoInfo () {
     return request({
       url: `/admin/web_site_info/seo`,
