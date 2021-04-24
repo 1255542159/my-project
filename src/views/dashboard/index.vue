@@ -53,7 +53,7 @@
                   <router-link class="el-icon-edit" to="/activity/list">活动管理</router-link>
                 </div>
                 <div class="fast-way-item">
-                  <router-link class="el-icon-edit" to="/system/list">轮播图管理</router-link>
+                  <router-link class="el-icon-edit" to="/apply/join">申请管理</router-link>
                 </div>
               </div>
             </el-card>

@@ -29,7 +29,7 @@
                       </el-option>
                     </el-select>
                   </el-form-item>
-                  <el-form-item label="账户" required>
+                  <el-form-item label="手机号" required>
                     <el-input v-model="user.username"></el-input>
                   </el-form-item>
                   <el-form-item label="密码" required>
@@ -147,9 +147,13 @@ export default {
         this.$message.error("密码不能为空");
         return;
       }
-      console.log("测试=====>"+this.user)
       user.addPersonnel(this.user).then((response) =>{
-        console.log(response.data);
+          if(response.data.code === 200){
+            this.$message.success(response.data.msg)
+          }else {
+            this.$message.error(response.data.msg)
+          }
+
       })
     },
 
@@ -219,5 +223,11 @@ export default {
 }
 .button .register-button {
   margin-left: 30px;
+}
+.admin-login-header-box{
+  margin-bottom: 20px;
+  widows: 100%;
+  height: 46px;
+  background-color: dodgerblue;
 }
 </style>
