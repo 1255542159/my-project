@@ -77,6 +77,7 @@ export default {
       club: {
         clubImg:'',
       },
+      postOrUpdateStatus:0,
       onImageSelectFor: 'club',
       postOrUpdate:'发布活动',
       pageNavigation: {
@@ -146,14 +147,26 @@ export default {
         return;
       }
       console.log(this.club)
-      club.addClub(this.club).then((response) => {
-        if (response.data.code === 200) {
-          this.$message.success(response.data.msg);
-          this.club = '';
-        } else {
-          this.$message.error(response.data.msg);
-        }
-      });
+      if(this.postOrUpdateStatus == 0){
+        club.addClub(this.club).then((response) => {
+          if (response.data.code === 200) {
+            this.$message.success(response.data.msg);
+            this.club = '';
+          } else {
+            this.$message.error(response.data.msg);
+          }
+        });
+      }else {
+        club.updateClub(this.club).then((response) =>{
+          if(response.data.code === 200){
+            this.$message.success(response.data.msg)
+          }else {
+            this.$message.error(response.data.msg)
+          }
+          this.getClubList();
+        })
+      }
+
     },
 
     listImages() {
@@ -173,6 +186,7 @@ export default {
     //获取其他页面的传来的数据
     if (this.$route.params.club != null) {
       this.postOrUpdate = "更新"
+      this.postOrUpdateStatus = 1;
       this.club = this.$route.params.club;
       console.log((this.club.clubImg))
     }

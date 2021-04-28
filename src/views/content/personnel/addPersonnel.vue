@@ -166,10 +166,8 @@ export default {
                 return;
             }
             user.addPersonnel(this.user).then((resp) => {
-                    this.$message.success(resp.data.msg);
                     //成功后将输入框置空
                     this.user = "";
-
             });
         },
 

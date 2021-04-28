@@ -3,7 +3,7 @@
     <div class="list-box">
       <el-table
         v-loading="loading"
-        :data="personnelLists"
+        :data="personnelLists.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
         :row-class-name="tableRowClassName"
         style="width: 100%"
         class="el-table"
@@ -59,7 +59,7 @@
             <el-input
               v-model="search"
               size="mini"
-              placeholder="输入关键字搜索"/>
+              placeholder="输入姓名搜索"/>
           </template>
           <template slot-scope="scope">
             <el-button @click="edit(scope.row)" type="primary" size="mini"

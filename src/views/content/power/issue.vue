@@ -2,7 +2,7 @@
   <div class="box">
     <div class="list-box">
       <el-table
-        :data="data"
+        :data="data.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
         border stripe
         style="width: 100%">
         <!--索引列-->
@@ -13,7 +13,14 @@
           <template slot-scope="scope">
             <el-button type="warning" icon="el-icon-setting"size="mini" @click="setRole(scope.row)">分配角色</el-button>
           </template>
+          <template slot="header" slot-scope="scope">
+            <el-input
+              v-model="search"
+              size="mini"
+              placeholder="输入姓名搜索"/>
+          </template>
         </el-table-column>
+
       </el-table>
       <div class="page-navigation-box margin-bottom clearfix">
         <el-pagination
