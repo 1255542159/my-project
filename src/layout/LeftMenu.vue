@@ -37,6 +37,7 @@
 
 <script>
 import login from "../api/login";
+import user from "../api/user"
 export default {
   name: "LeftMenu",
   data() {
@@ -47,26 +48,16 @@ export default {
     };
   },
   methods: {
-    // activeMenu() {
-    //   var path =
-    //     "/" +
-    //     window.location.href.split("/")[3] +
-    //     "/" +
-    //     window.location.href.split("/")[4] +
-    //     "/" +
-    //     window.location.href.split("/")[5];
-    //   return path;
-    // },
     changStatus() {
       this.isCollapse = !this.isCollapse;
       this.icon = "el-icon-s-unfold";
     },
-    // handleOpen(key, keyPath) {
-    //     console.log(key, keyPath);
-    //   },
-    //   handleClose(key, keyPath) {
-    //     console.log(key, keyPath);
-    //   }
+    openSystemInfo(){
+      this.$router.push({
+        path:'/user/system'
+      })
+  }
+
   },
   created() {
     login.getMenuList().then((response) => {
@@ -75,6 +66,17 @@ export default {
         this.data = response.data;
       }
     });
+    user.getActivityInfo().then((res) =>{
+      if(res.data.code === 200){
+        this.$notify.info({
+          title: "系统通知",
+          message: '你有'+ res.data.data.length +'条通知',
+          position: 'bottom-right',
+          onClick:this.openSystemInfo,
+        });
+      }
+
+    })
   },
 };
 </script>

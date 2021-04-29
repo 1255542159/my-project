@@ -102,4 +102,10 @@ auditDelete(id){
     method:'post'
   })
 },
+  getActivityInfo(){
+    return request({
+      url:'/api/user/system/msg',
+      method:'get'
+    })
+  },
 }

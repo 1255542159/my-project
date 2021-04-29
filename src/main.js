@@ -16,11 +16,14 @@ import 'font-awesome/css/font-awesome.css'
 import 'summernote'
 import 'summernote/dist/lang/summernote-zh-CN.js'
 import 'summernote/dist/summernote.css'
+//引入baseUrl
+import baseUrl from '../src/components/global'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.component('RightContent', RightContent)
 Vue.component('tabNav',tabNav)
 Vue.prototype.$axios = axios;
+Vue.prototype.BASE_URL = baseUrl;
 new Vue({
   el: '#app',
   router,

@@ -6,6 +6,7 @@ import RightContent from "../layout/RightContent";
 import BaseView from "../layout/BaseView";
 import dashboard from "../views/dashboard/index";
 import userInfo from '../views/content/userInfo'
+import systemInfo from '../views/content/systemInfo'
 //活动
 import listActivity from '../views/content/activity/listActivity'
 import addActivity from '../views/content/activity/addActivity'
@@ -178,7 +179,7 @@ export const routes = [
 
       {
         path: '/system',
-        name: '申请管理',
+        name: '系统管理',
         icon: 'el-icon-s-management',
         component: RightContent,
         children: [
@@ -188,7 +189,6 @@ export const routes = [
             icon: 'el-icon-edit-outline',
             name: '轮播图',
           },
-
 
         ]
       },
@@ -205,6 +205,12 @@ export const routes = [
             icon: 'el-icon-edit-outline',
             name: '账户设置',
           },
+          {
+            path: 'system',
+            component: systemInfo,
+            icon: 'el-icon-edit-outline',
+            name: '系统消息',
+          }
         ]
       },
     ]

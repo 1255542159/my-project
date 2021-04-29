@@ -16,12 +16,15 @@
                                         <div class="update-avatar-tips" @click="showAvatarDialog"></div>
                                     </div>
 
-                                    <div class="el-col el-col-14">
+                                  <div class="el-col el-col-14" v-if="this.editable == true">
+                                    <el-input class="nick-name"  v-model="newName"> </el-input>
+                                  </div>
+                                    <div class="el-col el-col-14" v-else>
                                         <div class="nick-name" v-text="user.name"></div>
                                         <div class="sex" v-text="user.sex"></div>
                                     </div>
                                     <div class="el-col el-col-6">
-                                        <button type="button" class="el-button  el-icon-edit el-button--primary el-button--small is-plain">
+                                        <button type="button" class="el-button  el-icon-edit el-button--primary el-button--small is-plain" @click="updateUserName">
                                             <!---->
                                             <!----><span>&nbsp;修改信息
                                             </span></button>
@@ -109,7 +112,9 @@ export default {
     name: 'userInfo',
     data() {
         return {
+          newName:"",
             showAvatar: false,
+            editable:false,
             user: {
                 id: "",
                 sno: "",
@@ -127,6 +132,9 @@ export default {
         }
     },
     methods: {
+      updateUserName(){
+         this.editable=true
+    },
         cropUploadFail(status, field) {
             console.log("1" + status + field)
         },

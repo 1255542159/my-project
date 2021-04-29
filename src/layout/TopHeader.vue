@@ -4,7 +4,11 @@
         <a href="/" class="header-logo float-left">社团管理中心</a>
     <div class="header-right-box float-right">
       <div class="header-user-info clearfix">
+
         <div class="header-user-avatar float-left">
+          <span class="el-popover__reference-wrapper">
+          </span>
+
           <img :src="avatar" style="object-fit: cover">
         </div>
         <div class="header-user-username float-left">
@@ -14,6 +18,7 @@
                       </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="userInfo">用户信息</el-dropdown-item>
+              <el-dropdown-item command="systemInfo">系统通知</el-dropdown-item>
               <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -50,6 +55,10 @@ export default {
             path:'/login'
           })
         })
+      }else if(command === 'systemInfo'){
+        this.$router.push({
+          path:'/user/system'
+        })
       }
 
 
@@ -73,6 +82,7 @@ export default {
 </script>
 
 <style >
+
 .header-user-info{
   float: right;
   margin-right: 10px;
