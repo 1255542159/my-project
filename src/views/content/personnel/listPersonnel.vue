@@ -162,7 +162,7 @@
 <script>
 import club from "../../../api/club";
 import user from "../../../api/user";
-import * as dateUtils from "../../../utils/date";
+import formatDate from "../../../utils/date";
 
 export default {
   data() {
@@ -302,7 +302,7 @@ export default {
     },
     formatDate(dateStr) {
       let date = new Date(dateStr);
-      return dateUtils.formatDate(date, "yyyy-MM-dd");
+      return formatDate(date, "yyyy-MM-dd");
     },
     edit(item) {
       //获取社团，得到社团名供选择

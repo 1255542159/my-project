@@ -7,8 +7,7 @@
         <span class="item-publishTime">{{item.startTime}}</span>
       </div>
       <div class="item-content">
-
-        <a :href="`${baseUrl+item.id}`" style="color:#e6a23c"><span>{{item.title}}</span></a>
+        <a v-bind:href="['/actId?id='+item.id]" style="color:#e6a23c"><span>{{item.title}}</span></a>
         请准时参加
       </div>
     </div>
@@ -33,7 +32,6 @@ export default {
        }
       })
     }
-
   },
   mounted() {
     this.getInfo();

@@ -79,7 +79,7 @@ export default {
       },
       postOrUpdateStatus:0,
       onImageSelectFor: 'club',
-      postOrUpdate:'发布活动',
+      postOrUpdate:'创建社团',
       pageNavigation: {
         currentPage: 1,
         totalCount: 0,
@@ -157,6 +157,7 @@ export default {
           }
         });
       }else {
+        this.club.status = 2;
         club.updateClub(this.club).then((response) =>{
           if(response.data.code === 200){
             this.$message.success(response.data.msg)
@@ -188,7 +189,7 @@ export default {
       this.postOrUpdate = "更新"
       this.postOrUpdateStatus = 1;
       this.club = this.$route.params.club;
-      console.log((this.club.clubImg))
+      console.log((this.postOrUpdateStatus))
     }
     this.listImages();
   },

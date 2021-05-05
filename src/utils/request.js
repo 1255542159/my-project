@@ -35,6 +35,8 @@ service.interceptors.response.use(response => {
   //     center:true
   //   });
   // }
+  console.log(res
+  )
   if (res.code===400 || res.code ===401){
     Message({
       message: res.msg ||  res.message|| "Error",
@@ -42,16 +44,16 @@ service.interceptors.response.use(response => {
       center:true
     });
   }
-  if(res.code === 403){
+  if(res.code === 403 || res.code === 500){
     window.localStorage.removeItem('cms_token')
     MessageBox.alert('登录信息超时', "登录失效", {
       confirmButtonText: "跳转登录页面",
       callback: action => {
         // 跳转登录页
-    window.location.href='/'
+    window.location.href='/login'
       }
     });
-   
+
   }
   return response;
 }, error => {

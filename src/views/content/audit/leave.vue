@@ -12,6 +12,10 @@
                   <div class="item-title">
                     <a v-text="item.type"></a>
                   </div>
+                  <div class="item-description">
+                    理由：
+                    <a v-text="item.description"></a>
+                  </div>
                   <!-- 点赞，浏览 -->
                   <div class="item-info">
                     <span class="el-tag el-tag--warning el-tag--smjoin el-tag--light" v-if="item.status===1">已通过</span>
@@ -41,6 +45,10 @@
                   <div class="item-title">
                     <a v-text="item.type"></a>
                   </div>
+                  <div class="item-description">
+                    理由：
+                    <a v-text="item.description"></a>
+                  </div>
                   <!-- 点赞，浏览 -->
                   <div class="item-info">
                     <span class="el-tag el-tag--warning el-tag--smjoin el-tag--light" v-if="item.status===1">已通过</span>
@@ -69,6 +77,10 @@
                   <!-- 标题 -->
                   <div class="item-title">
                     <a v-text="item.type"></a>
+                  </div>
+                  <div class="item-description">
+                    理由：
+                    <a v-text="item.description"></a>
                   </div>
                   <!-- 点赞，浏览 -->
                   <div class="item-info">
@@ -203,6 +215,15 @@ export default {
   font-weight: 600;
   line-height: 28px;
   font-size: 18px;
+}
+.el-card__body .item-description {
+  font-weight: 600;
+  line-height: 28px;
+  font-size: 10px;
+}
+
+.el-card__body .item-description a{
+  color: #000;
 }
 
 .el-card__body .item-title a {

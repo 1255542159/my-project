@@ -1,4 +1,4 @@
-export function formatDate (date, fmt) {
+const formatDate=(date, fmt) =>{
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
   }
@@ -22,3 +22,5 @@ export function formatDate (date, fmt) {
 function padLeftZero (str) {
   return ('00' + str).substr(str.length)
 }
+
+export default formatDate;

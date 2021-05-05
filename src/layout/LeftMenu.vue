@@ -68,12 +68,17 @@ export default {
     });
     user.getActivityInfo().then((res) =>{
       if(res.data.code === 200){
-        this.$notify.info({
-          title: "系统通知",
-          message: '你有'+ res.data.data.length +'条通知',
-          position: 'bottom-right',
-          onClick:this.openSystemInfo,
-        });
+        if(res.data.data == ''){
+          return
+        }else {
+          this.$notify.info({
+            title: "系统通知",
+            message: '你有'+ res.data.data.length +'条通知',
+            position: 'bottom-right',
+            onClick:this.openSystemInfo,
+          });
+        }
+
       }
 
     })

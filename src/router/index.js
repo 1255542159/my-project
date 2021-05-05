@@ -28,12 +28,19 @@ import apply from '../views/content/apply/apply'
 import mineApply from '../views/content/apply/mineApply'
 //系统设置
 import Looper from '../views/content/system/looper'
-
+//前台
+import portal from '../views/portal/portal'
+import pActivity from '../views/portal/components/activity'
+import actId from '../views/portal/components/actId'
+import clubId from '../views/portal/components/clubId'
+import pClub from '../views/portal/components/club'
+import pAbout from '../views/portal/components/about'
 Vue.use(VueRouter)
 
 export const routes = [
+
   {
-    path: '/',
+    path: '/admin',
     name: 'BaseView',
     redirect: "/index",
     component: BaseView,
@@ -216,6 +223,45 @@ export const routes = [
     ]
   },
   //前台
+  {
+    path: '/',
+    name: "portal",
+    redirect: "/pActivity",
+    component: portal,
+    children: [
+      {
+        path: 'pActivity',
+        component: pActivity,
+        icon: 'el-icon-edit-outline',
+        name: '门户活动',
+
+      },
+      {
+        path: 'actId',
+        component: actId,
+        icon: 'el-icon-edit-outline',
+        name: 'actId',
+      },
+      {
+        path: 'clubId',
+        component: clubId,
+        icon: 'el-icon-edit-outline',
+        name: 'clubId',
+      },
+      {
+        path: 'pClub',
+        component: pClub,
+        icon: 'el-icon-edit-outline',
+        name: '门户社团',
+      },
+      {
+        path: 'pAbout',
+        component: pAbout,
+        icon: 'el-icon-edit-outline',
+        name: '门户关于',
+      },
+    ]
+  },
 
   {
     path: '/login',
@@ -228,25 +274,48 @@ export const routes = [
     component: register,
   },
 
+
 ]
 
 const router = new VueRouter({
+
   routes
 })
 
 // 挂在路由守卫
 router.beforeEach((to, form, next) => {
+  document.body.scrollTop = 0
+  // firefox
+  document.documentElement.scrollTop = 0
+  // safari
+  window.pageYOffset = 0
+  next()
   // to 将要访问的路径
   // from 代表从哪个路径跳转而来
   // next 是一个函数，表示放行
   //     next()  放行    next('/login')  强制跳转
-  if (to.path === '/login') return next()
-  if (to.path === '/register') return next()
   // 获取token
   let Authorization = window.localStorage.getItem('cms_token');
-  if (!Authorization) return next('/login')
+  if (to.path === '/login')
+  {
+   if (Authorization){
+     return next('/admin')
+   }
+    return next()
+  }
+  if (to.path === '/register') return next()
+  if (to.path === '/pActivity') return next()
+  if (to.path === '/actId') return next()
+  if (to.path === '/clubId') return next()
+  if (to.path === '/pClub') return next()
+  if (to.path === '/pAbout') return next()
+
+
+  if (!Authorization) return next('/')
   next()
 })
+
+
 
 export default router
 

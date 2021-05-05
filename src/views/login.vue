@@ -87,7 +87,7 @@ export default {
           window.localStorage.setItem("cms_token", cms_token);
           window.localStorage.setItem("avatar", response.data.data.avatar);
           window.localStorage.setItem("name", response.data.data.name);
-          this.$router.push({ path: "/" });
+          this.$router.push({ path: "/admin" });
         } else {
           this.updateVerifyCode();
         }

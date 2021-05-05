@@ -74,6 +74,11 @@
             </span>
       </el-dialog>
     </div>
+
+
+
+
+
   </div>
 </template>
 
@@ -158,6 +163,7 @@ export default {
   margin-bottom: 20px;
 }
 
+
 .el-upload el-upload--text{
   display: inline-block;
   text-align: center;
@@ -209,7 +215,17 @@ export default {
   width: 200px;
   height: 140px;
 }
-
+.image-selector-uploader .el-upload__input {
+  display: none;
+}
+.image-selector-list .el-radio-button__inner,
+.el-radio-button:first-child .el-radio-button__inner,
+.el-radio-button:last-child .el-radio-button__inner {
+  border: none;
+  border-radius: 4px;
+  padding: 3px;
+  margin: 5px;
+}
 
 
 

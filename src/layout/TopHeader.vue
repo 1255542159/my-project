@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header-left-box">
-        <a href="/" class="header-logo float-left">社团管理中心</a>
+        <a href="/index" class="header-logo float-left">社团管理中心</a>
     <div class="header-right-box float-right">
       <div class="header-user-info clearfix">
 

@@ -9,7 +9,7 @@
               <div class="el-card__body">
                 <div>
                   <div class="item-title">
-                    <a v-text="item.clubName"></a>
+                    <a v-bind:href="['/clubId?id='+item.id]" v-text="item.clubName"></a>
                   </div>
                   <div class="item-content clearfix" v-text="'摘要:'+item.clubDesc"></div>
                   <!-- 点赞，浏览 -->
@@ -39,7 +39,7 @@
               <div class="el-card__body">
                 <div>
                   <div class="item-title">
-                    <a v-text="item.clubName"></a>
+                    <a v-bind:href="['/clubId?id='+item.id]" v-text="item.clubName"></a>
                   </div>
                   <div class="item-content clearfix" v-text="'摘要:'+item.clubDesc"></div>
                   <!-- 点赞，浏览 -->
@@ -69,7 +69,7 @@
               <div class="el-card__body">
                 <div>
                   <div class="item-title">
-                    <a v-text="item.clubName"></a>
+                    <a v-bind:href="['/clubId?id='+item.id]" v-text="item.clubName"></a>
                   </div>
                   <div class="item-content clearfix" v-text="'摘要:'+item.clubDesc"></div>
                   <!-- 点赞，浏览 -->
@@ -99,7 +99,7 @@
               <div class="el-card__body">
                 <div>
                   <div class="item-title">
-                    <a v-text="item.clubName"></a>
+                    <a v-bind:href="['/clubId?id='+item.id]" v-text="item.clubName"></a>
                   </div>
                   <div class="item-content clearfix" v-text="'摘要:'+item.clubDesc"></div>
                   <!-- 点赞，浏览 -->

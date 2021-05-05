@@ -10,7 +10,7 @@
                             <div>
                                 <!-- 标题 -->
                                 <div class="item-title">
-                                    <a v-text="item.title"></a>
+                                    <a v-bind:href="['/actId?id='+item.id]" v-text="item.title"></a>
                                 </div>
                                 <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
                                 <!-- 点赞，浏览 -->
@@ -42,7 +42,7 @@
                             <div>
                                 <!-- 标题 -->
                                 <div class="item-title">
-                                    <a v-text="item.title"></a>
+                                    <a v-bind:href="['/actId?id='+item.id]" v-text="item.title"></a>
                                 </div>
                                 <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
                                 <!-- 点赞，浏览 -->
@@ -72,7 +72,7 @@
                             <div>
                                 <!-- 标题 -->
                                 <div class="item-title">
-                                    <a v-text="item.title"></a>
+                                    <a v-bind:href="['/actId?id='+item.id]" v-text="item.title"></a>
                                 </div>
                                 <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
                                 <!-- 点赞，浏览 -->
@@ -102,7 +102,7 @@
                             <div>
                                 <!-- 标题 -->
                                 <div class="item-title">
-                                    <a v-text="item.title"></a>
+                                    <a v-bind:href="['/actId?id='+item.id]" v-text="item.title"></a>
                                 </div>
                                 <div class="item-content clearfix" v-text="'摘要:'+item.summary"></div>
                                 <!-- 点赞，浏览 -->
