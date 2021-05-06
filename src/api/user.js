@@ -108,4 +108,11 @@ auditDelete(id){
       method:'get'
     })
   },
+
+  exportExcel(){
+    return request({
+      url:'/api/user/export',
+      method:'get'
+    })
+  },
 }

@@ -39,15 +39,15 @@
                     ></el-input>
                   </el-form-item>
                 </div></el-col>
-                <el-col :span="12"><div class="grid-content bg-purple-light">
-                  <div>
-                    <el-form-item  class="user-info-avatar">
-                      <div class="user-avatar-container" @click="showAvatarDialog">
-                        <el-avatar :src="user.avatar"></el-avatar>
-                      </div>
-                    </el-form-item>
-                  </div>
-                </div></el-col>
+<!--                <el-col :span="12"><div class="grid-content bg-purple-light">-->
+<!--                  <div>-->
+<!--                    <el-form-item  class="user-info-avatar">-->
+<!--                      <div class="user-avatar-container" @click="showAvatarDialog">-->
+<!--                        <el-avatar :src="user.avatar"></el-avatar>-->
+<!--                      </div>-->
+<!--                    </el-form-item>-->
+<!--                  </div>-->
+<!--                </div></el-col>-->
               </el-row>
 
               <el-form-item class="button">
@@ -150,6 +150,7 @@ export default {
       user.addPersonnel(this.user).then((response) =>{
           if(response.data.code === 200){
             this.$message.success(response.data.msg)
+            this.$router.push({ path: "/login" });
           }else {
             this.$message.error(response.data.msg)
           }

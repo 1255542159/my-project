@@ -28,6 +28,7 @@ import apply from '../views/content/apply/apply'
 import mineApply from '../views/content/apply/mineApply'
 //系统设置
 import Looper from '../views/content/system/looper'
+import aboutSetting from '../views/content/system/about'
 //前台
 import portal from '../views/portal/portal'
 import pActivity from '../views/portal/components/activity'
@@ -196,6 +197,12 @@ export const routes = [
             icon: 'el-icon-edit-outline',
             name: '轮播图',
           },
+          {
+            path: 'about',
+            component: aboutSetting,
+            icon: 'el-icon-edit-outline',
+            name: '关于设置',
+          },
 
         ]
       },
@@ -278,7 +285,7 @@ export const routes = [
 ]
 
 const router = new VueRouter({
-
+  mode: 'history',
   routes
 })
 

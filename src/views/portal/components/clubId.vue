@@ -40,7 +40,42 @@
             </div>
           </div>
         </div>
-        <div id="article-detail-right-part" class="float-left"></div>
+        <div id="article-detail-right-part" class="float-left">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>社团Leader</span>
+            </div>
+            <div class="border-radius-default">
+              <div class="user-info-content">
+                <div class="blue-line" style="height: 50px; background: rgb(0, 132, 255);"></div>
+                <a>
+                <span class="user-icon">
+                  <span class="el-avatar el-avatar--circle" style="height: 60px; width: 60px; line-height: 60px;"><img
+                    :src="user.avatar" style="object-fit: cover;"></span>
+                </span>
+                </a>
+              </div>
+              <a v-text="user.name" class="user-name"></a>
+              <a class="user-sign">{{user.sign}}</a>
+<!--              <router-link :to="{path:'clubId',query:{id:user.clubId}}">-->
+<!--                <a class="user-clubName">{{club.clubName}}</a>-->
+<!--              </router-link>-->
+            </div>
+          </el-card>
+<!--          <el-card class="hot-card">-->
+<!--            <div slot="header" class="clearfix">-->
+<!--              <span>热门活动</span>-->
+<!--            </div>-->
+<!--            <div class="border-radius-default">-->
+<!--              <div class="user-info-content">-->
+<!--                <ul v-for="(item,index) in hotActivity">-->
+
+<!--                  <li> <a  v-bind:href="['/actId?id='+item.id]">{{item.title}}&#45;&#45;&#45;&#45;查阅{{item.viewCount}}次</a></li>-->
+<!--                </ul>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </el-card>-->
+        </div>
       </div>
     </div>
 
@@ -61,6 +96,8 @@ export default {
   data() {
     return {
         club:'',
+      leaderId:'',
+      user: [],
     }
   },
   methods:{
@@ -72,7 +109,14 @@ export default {
       portal.getClubDetail(this.$route.query.id).then((res) =>{
         if(res.data.code === 200){
           this.club = res.data.data
+          this.leaderId = res.data.data.leaderId;
+          this.getClubLeader();
         }
+      })
+    },
+    getClubLeader(){
+      portal.getActivityUserInfo(this.leaderId).then((res) =>{
+        this.user = res.data.data;
       })
     }
 
@@ -86,6 +130,9 @@ export default {
 </script>
 
 <style>
+#article-detail-right-part {
+  width: 320px;
+}
 .publish-info-left-part{
   text-align: left;
 }
@@ -152,6 +199,10 @@ img {
   line-height: 28px;
 
 }
+.float-left {
+  float: left;
+}
+
 .main-content{
   margin-top: 10px;
 }
@@ -171,6 +222,33 @@ img {
   margin-left: 70px;
   margin-right: 20px;
 }
+.user-info-content {
+  width: 100%;
+  background: #fcfcfc;
+  position: relative;
+}
+.user-sign{
+  position: relative;
+  display: block;
+  top: -10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.user-name{
+  position: relative;
+  top: -20px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.user-icon{
+  position: relative;
+  top: -30px;
+  display: block;
+  text-align: center;
+}
+
 
 
 </style>

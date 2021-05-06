@@ -49,8 +49,21 @@ export default{
       url:'/api/admin/delete/carousel/'+id,
       method:'post'
     })
-  }
+  },
 
+  saveAbout(settings){
+    return request({
+      url:'/api/admin/save/about',
+      method:'post',
+      data:settings
+    })
+  },
+  getAbout(){
+  return request({
+    url:'/api/admin/get/about',
+    method:'get'
+  })
+},
 
 
 }

@@ -39,6 +39,9 @@
                         <!---->
                       </div>
                       <div class="el-col el-col-6">
+                        <button type="button"
+                                class="el-button modify-info-btn el-button--primary el-button--small is-plain" @click="updateSign"><span>
+                                                更换签名</span></button>
                       </div>
                     </div>
                   </div>
@@ -121,6 +124,7 @@ export default {
         phone: '',
         email: '',
         status: '',
+        sign:'',
         clubId: '',
         club: {
           id: '',
@@ -154,6 +158,22 @@ export default {
         inputErrorMessage: '邮箱格式不正确'
       }).then(({ value }) => {
         this.user.email = value;
+        this.updateUserInfo();
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    },
+
+
+    updateSign(){
+      this.$prompt('请输入签名', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        this.user.sign = value;
         this.updateUserInfo();
       }).catch(() => {
         this.$message({

@@ -32,7 +32,7 @@
       <el-main class="portal-main">
         <router-view></router-view>
       </el-main>
-      <el-footer>Copyright © 2020-2021 社团管理系统</el-footer>
+      <el-footer>Copyright © 2020-2021 程序猿,用爱驱动</el-footer>
     </el-container>
   </div>
 </template>

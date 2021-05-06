@@ -52,6 +52,14 @@
             </el-popover>
           </template>
         </el-table-column>
+        <el-table-column align="right">
+          <template slot="header" slot-scope="scope">
+            <a href="/api/user/export">
+              <el-button size="mini" >导出excel</el-button>
+            </a>
+
+          </template>
+        </el-table-column>
 
         <el-table-column
         align="right">

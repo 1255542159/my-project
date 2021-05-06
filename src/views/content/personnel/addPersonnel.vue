@@ -119,7 +119,6 @@ export default {
         currentSel(selVa) {
             //将clubName转化为clubId传入到user.clubId内
             this.user.clubId = this.user.club.clubName;
-            console.log("currentSel   ===>" + this.user.clubId);
         },
         currentSex(selVa) {
             console.log(selVa);
@@ -166,8 +165,10 @@ export default {
                 return;
             }
             user.addPersonnel(this.user).then((resp) => {
-                    //成功后将输入框置空
-                    this.user = "";
+                   if(resp.data.code === 200){
+                     this.$message.success(resp.data.msg);
+                     this.user = '';
+                   }
             });
         },
 
