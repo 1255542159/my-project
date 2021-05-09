@@ -133,6 +133,7 @@ export default {
       let item = this.images[this.selectedImageIndex];
       console.log(item)
       this.isImageSelectorShow = false;
+      this.getLooper();
     },
     listImages() {
       user.listImages(this.pageNavigation.currentPage, this.pageNavigation.pageSize, 'carousel').then((response) => {
@@ -156,7 +157,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 
 .image-action-bar {
   padding-left: 1px;

@@ -124,7 +124,7 @@ export default {
 
 }
 </script>
-<style>
+<style scoped>
 .list-box {
   box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.1);
   border-radius: 5px;

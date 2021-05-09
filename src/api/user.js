@@ -115,4 +115,12 @@ auditDelete(id){
       method:'get'
     })
   },
+
+  resetPwd(user){
+    return request({
+      url:`/api/user/resetPwd`,
+      method:'put',
+      data:user
+    })
+  },
 }

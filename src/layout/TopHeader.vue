@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header-left-box">
-        <a href="/index" class="header-logo float-left">社团管理中心</a>
+        <a href="/" class="header-logo float-left">社团管理中心</a>
     <div class="header-right-box float-right">
       <div class="header-user-info clearfix">
 
@@ -18,7 +18,7 @@
                       </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="userInfo">用户信息</el-dropdown-item>
-              <el-dropdown-item command="systemInfo">系统通知</el-dropdown-item>
+              <el-dropdown-item command="systemInfo">社团消息</el-dropdown-item>
               <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>

@@ -21,7 +21,11 @@
                     </div>
                     <div class="el-col el-col-6">
                       <button type="button" class="el-button  el-icon-edit el-button--primary el-button--small is-plain"
-                              @click="updateUserName"><span>&nbsp;修改信息</span></button>
+                              @click="updateNameDialog"><span>&nbsp;修改信息</span></button>
+                    </div>
+                    <div class="el-col el-col-6" style="margin-top: 20px">
+                      <button type="button" class="el-button  el-icon-edit el-button--danger el-button--small is-plain"
+                              @click="restPwdDialog"><span>&nbsp;密码重置</span></button>
                     </div>
                   </div>
                 </div>
@@ -83,6 +87,7 @@
                     </div>
                   </div>
                 </div>
+                <el-divider></el-divider>
               </div>
             </div>
           </main>
@@ -96,7 +101,6 @@
                      img-format="png">
       </avatar-upload>
     </div>
-
 
   </div>
 </template>
@@ -125,6 +129,7 @@ export default {
         email: '',
         status: '',
         sign:'',
+        password:'',
         clubId: '',
         club: {
           id: '',
@@ -141,8 +146,13 @@ export default {
         inputPattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/,
         inputErrorMessage: '手机号格式不正确'
       }).then(({ value }) => {
-        this.user.phone = value;
-        this.updateUserInfo();
+        if(value == null){
+          this.$message.error("手机号不能为空")
+        }else {
+          this.user.phone = value;
+          this.updateUserInfo();
+        }
+
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -157,8 +167,13 @@ export default {
         inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
         inputErrorMessage: '邮箱格式不正确'
       }).then(({ value }) => {
-        this.user.email = value;
-        this.updateUserInfo();
+        if(value == null){
+          this.$message.error("邮箱不能为空")
+        }else {
+          this.user.email = value;
+          this.updateUserInfo();
+        }
+
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -173,8 +188,14 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(({ value }) => {
-        this.user.sign = value;
-        this.updateUserInfo();
+        if(value == null){
+
+          this.$message.error("签名不能为空")
+        }else {
+          this.user.sign = value;
+          this.updateUserInfo();
+        }
+
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -182,8 +203,56 @@ export default {
         });
       });
     },
-    updateUserName () {
-      this.editable = true
+
+
+    updateNameDialog(){
+      this.$prompt('请输入姓名', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        if(value == null){
+          this.$message.error("姓名不能为空")
+        }else {
+          this.user.name = value;
+          this.updateUserInfo();
+        }
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    },
+
+
+    restPwdDialog(){
+      this.$prompt('请输入密码', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        if(value == null){
+          this.$message.error("手机号不能为空")
+        }else {
+          this.user.password = value;
+          this.resetPassword();
+        }
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    },
+
+    resetPassword(){
+      user.resetPwd(this.user).then((res) =>{
+        if (res.data.code === 200){
+          this.$message.success(res.data.msg);
+          this.dialogVisible = false;
+        }
+      })
     },
 
     cropUploadFail (status, field) {
@@ -228,6 +297,13 @@ export default {
         }
       })
     },
+  },
+  handleClose(done) {
+    this.$confirm('确认关闭？')
+      .then(_ => {
+        done();
+      })
+      .catch(_ => {});
   },
   mounted () {
     this.getUserInfo()

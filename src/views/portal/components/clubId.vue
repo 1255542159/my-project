@@ -129,7 +129,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #article-detail-right-part {
   width: 320px;
 }
@@ -241,6 +241,152 @@ img {
   display: block;
   text-align: center;
   text-decoration: none;
+}
+.user-icon{
+  position: relative;
+  top: -30px;
+  display: block;
+  text-align: center;
+}
+
+.user-info-content li{
+  list-style: none;
+  text-align: left;
+  cursor: pointer;
+
+}
+.user-info-content li a{
+  color: #92979A;
+}
+.user-info-content li :hover{
+  color: #0084FF;
+  text-decoration: none;
+}
+.hot-card{
+  margin-top: 30px;
+}
+.el-icon-view{
+  margin-left: 10px;
+}
+.user-sign{
+  position: relative;
+  display: block;
+  top: -10px;
+  text-align: center;
+  text-decoration: none;
+}
+.user-clubName{
+  position: relative;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+.user-name{
+  position: relative;
+  top: -20px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.article-publish-time {
+  margin-top: 10px;
+}
+
+.main-content {
+  padding: 30px;
+}
+
+.article-header {
+  margin-bottom: 20px;
+}
+.article-title-part{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*.article-title-part span {*/
+/*  font-size: 1.75rem;*/
+/*  line-height: 36px;*/
+/*  color: #212529;*/
+/*  font-weight: 600;*/
+/*}*/
+
+.clear-fix {
+  display: block;
+  *zoom: 1;
+}
+
+.float-left {
+  float: left;
+}
+
+#article-detail-right-part {
+  width: 320px;
+}
+
+.article-content > p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.article-content img {
+  max-width: 900px;
+  box-shadow: 0 0 6px;
+  cursor: zoom-in;
+  border-radius: 3px;
+  display: block;
+  margin: 10px auto;
+}
+.markdown-body img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+  min-width: 100%;
+}
+img {
+  vertical-align: middle !important;
+}
+
+.article-content-part {
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 20px 20px 40px;
+}
+
+.border-radius-default {
+  border-radius: 4px;
+}
+
+.article-content {
+  color: #333;
+  margin-bottom: 40px;
+  line-height: 28px;
+}
+
+.article-content, p {
+  word-break: break-all;
+}
+
+
+
+#article-detail-center-part {
+  width: 70%;
+
+}
+
+.float-left {
+  float: left;
+}
+
+.article-detail {
+  display: flex;
+  justify-content: space-around;
+}
+.user-info-content {
+  width: 100%;
+  background: #fcfcfc;
+  position: relative;
 }
 .user-icon{
   position: relative;

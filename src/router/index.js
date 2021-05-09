@@ -223,7 +223,7 @@ export const routes = [
             path: 'system',
             component: systemInfo,
             icon: 'el-icon-edit-outline',
-            name: '系统消息',
+            name: '社团消息',
           }
         ]
       },
